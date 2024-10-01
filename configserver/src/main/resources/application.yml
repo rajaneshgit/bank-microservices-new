@@ -10,12 +10,14 @@ spring:
         #native:
           #search-locations: "classpath:/config"
         git:
-          uri: "https://github.com/rajaneshgit/bank-microservices"
-          search-paths: "configserver"
+          uri: "https://github.com/rajaneshgit/bank-microservices-new.git"
+          search-paths: "configserver/src/main/resources/config"
           default-label: main
           timeout: 5
           clone-on-start: true
           force-pull: true
+          username: rajaneshgit
+          password: "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"
 
 server:
   port: 8071

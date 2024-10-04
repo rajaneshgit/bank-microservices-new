@@ -18,9 +18,29 @@ spring:
           force-pull: true
           username: rajaneshgit
           password: "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"
-
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
 encrypt:
   key: "edg12345wd678a901g23f456A"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
 
 server:
   port: 8071

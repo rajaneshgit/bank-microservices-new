@@ -2,29 +2,28 @@ spring:
   application:
     name: "configserver"
   profiles:
-    #active: native
+    # active: native
     active: git
   cloud:
     config:
       server:
-        #native:
-          #search-locations: "classpath:/config"
+        # native:
+        # search-locations: "classpath:/config"
+        # search-locations: "file:///Users//eazybytes//Documents//config"
         git:
           uri: "https://github.com/rajaneshgit/bank-microservices-new.git"
           search-paths: "configserver/src/main/resources/config"
           default-label: main
-          timeout: 5
+          timeout: 10
           clone-on-start: true
           force-pull: true
           username: rajaneshgit
           password: "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"
   rabbitmq:
-    host: "localhost"
+    host: rabbitmq
     port: 5672
     username: "guest"
     password: "guest"
-encrypt:
-  key: "edg12345wd678a901g23f456A"
 
 management:
   endpoints:
@@ -41,6 +40,9 @@ management:
       probes:
         enabled: true
 
+encrypt:
+  key: "edg12345wd678a901g23f456A"
 
 server:
   port: 8071
+

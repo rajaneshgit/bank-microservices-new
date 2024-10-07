@@ -12,7 +12,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
-      start_period: 5s
+      start_period: 10s
     extends:
       file: common-config.yml
       service: network-deploy-service
@@ -22,15 +22,18 @@ services:
     container_name: configserver-ms
     ports:
       - "8071:8071"
-    depends_on:
-      rabbitmq:
-        condition: service_healthy
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq  # Add this line if not set in properties
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
     healthcheck:
-      test: "curl --fail --silent http://configserver-ms:8071/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
+      test: "curl --fail --silent http://localhost:8071/actuator/health/readiness | grep UP || exit 1"
+      #test: ["CMD", "sh", "-c", "wget -qO- http://localhost:8071/actuator/health/readiness | grep UP || exit 1" ]
+      interval: 15s
       timeout: 5s
       retries: 10
-      start_period: 10s
+      start_period: 60s
     extends:
       file: common-config.yml
       service: microservice-base-config

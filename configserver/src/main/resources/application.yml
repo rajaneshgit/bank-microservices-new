@@ -1,4 +1,5 @@
 spring:
+
   application:
     name: "configserver"
   profiles:
@@ -25,6 +26,7 @@ management:
     web:
       exposure:
         include: "*"
+      base-path: "/actuator"
   health:
     readiness-state:
       enabled: true
@@ -32,12 +34,14 @@ management:
       enabled: true
   endpoint:
     health:
+      show-details: ALWAYS
       probes:
+        add-additional-paths: true
         enabled: true
-
 encrypt:
   key: "edg12345wd678a901g23f456A"
 
 server:
   port: 8071
+
 

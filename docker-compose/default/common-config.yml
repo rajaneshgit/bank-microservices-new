@@ -1,11 +1,11 @@
 services:
-  network-deploy-service:
-    networks:
-      - eazybank
+#  network-deploy-service:
+#    networks:
+#      - default_rajabank
   microservice-db-config:
-    extends:
-      service: network-deploy-service
-    image: mysql:latest
+#    extends:
+#      service: network-deploy-service
+    image: mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 20s
@@ -16,8 +16,8 @@ services:
       MYSQL_ROOT_PASSWORD: root2
 
   microservice-base-config:
-    extends:
-      service: network-deploy-service
+#    extends:
+#      service: network-deploy-service
     deploy:
       resources:
         limits:
@@ -28,6 +28,6 @@ services:
       service: microservice-base-config
     environment:
       SPRING_PROFILES_ACTIVE: default
-      SPRING_CONFIG_IMPORT: configserver:http://configserver-ms:8071/
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root2

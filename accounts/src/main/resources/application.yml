@@ -14,8 +14,10 @@ spring:
     hibernate:
       ddl-auto: update
   config:
-    import: "configserver:http://127.0.0.1:8071/"
-
+    import: "configserver:http://localhost:8071/"
+  cloud:
+    config:
+      uri: "http://configserver:8071/"
 
 management:
   endpoints:

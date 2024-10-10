@@ -1,13 +1,15 @@
 services:
-#  network-deploy-service:
-#    networks:
-#      - default_rajabank
+
+  network-deploy-service:
+    networks:
+      - rajabank
+
   microservice-db-config:
-#    extends:
-#      service: network-deploy-service
+    extends:
+      service: network-deploy-service
     image: mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       timeout: 20s
       retries: 10
       interval: 10s
@@ -16,8 +18,8 @@ services:
       MYSQL_ROOT_PASSWORD: root2
 
   microservice-base-config:
-#    extends:
-#      service: network-deploy-service
+    extends:
+      service: network-deploy-service
     deploy:
       resources:
         limits:
@@ -26,6 +28,11 @@ services:
   microservice-configserver-config:
     extends:
       service: microservice-base-config
+    depends_on:
+      configserver:
+        condition: service_healthy
+      accountsdb:
+        condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: default
       SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/

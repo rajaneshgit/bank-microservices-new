@@ -14,7 +14,7 @@ spring:
         git:
           uri: "https://github.com/rajaneshgit/bank-microservices-new.git"
           search-paths: "configserver/src/main/resources/config"
-          default-label: main
+          default-label: main2
           timeout: 10
           clone-on-start: true
           force-pull: true

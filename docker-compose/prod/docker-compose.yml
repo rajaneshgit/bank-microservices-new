@@ -115,6 +115,31 @@ services:
       service: microservice-eureka-config
       file: common-config.yml
 
+
+  gatewayserver:
+    image: "rajadocker9971/gatewayserver:v3"
+    container_name: gatewayserver-ms
+    ports:
+      - "8072:8072"
+    depends_on:
+      accounts:
+        condition: service_healthy
+      loans:
+        condition: service_healthy
+      cards:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "gatewayserver"
+    healthcheck:
+      test: "curl --fail --silent http://localhost:8072/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
+    extends:
+      service: microservice-eureka-config
+      file: common-config.yml
+
 networks:
   rajabank:
     driver: "bridge"

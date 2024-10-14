@@ -4,24 +4,21 @@ spring:
   config:
     import: "optional:configserver:http://localhost:8071/"
   cloud:
-    config:
-      uri: "http://configserver:8071/"
     gateway:
       discovery:
         locator:
-          enabled: true
-          lowerCaseServiceIds: true
-
+          enabled: false
+          lowerCaseServiceId: true
 
 management:
-  info:
-    env:
-      enabled: true
   endpoints:
     web:
       exposure:
         include: "*"
       base-path: "/actuator"
+  info:
+    env:
+      enabled: true
   health:
     readiness-state:
       enabled: true
@@ -35,13 +32,13 @@ management:
       probes:
         add-additional-paths: true
         enabled: true
-info:
-  description: "gatewayserver"
-  version: "1.0.0"
-  title: "Bank Gateway Server Microservice"
+    shutdown:
+      enabled: true
 
-logging:
-  level:
-    com:
-      raja:
-        gatewayserver: DEBUG
+info:
+  description: "Bank Gateway Server Application"
+  version: "1.0.0"
+  title: "Gateway Server"
+
+
+

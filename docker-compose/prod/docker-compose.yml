@@ -58,11 +58,8 @@ services:
       retries: 10
       start_period: 60s
     extends:
-      service: microservice-base-config
+      service: microservice-configserver-config
       file: common-config.yml
-    depends_on:
-      configserver:
-        condition: service_healthy
 
   accounts:
     image: "rajadocker9971/accounts:v3"
@@ -79,7 +76,7 @@ services:
       retries: 10
       start_period: 60s
     extends:
-      service: microservice-configserver-config
+      service: microservice-eureka-config
       file: common-config.yml
 
   loans:
@@ -97,7 +94,7 @@ services:
       retries: 10
       start_period: 60s
     extends:
-      service: microservice-configserver-config
+      service: microservice-eureka-config
       file: common-config.yml
 
   cards:
@@ -115,7 +112,7 @@ services:
       retries: 10
       start_period: 60s
     extends:
-      service: microservice-configserver-config
+      service: microservice-eureka-config
       file: common-config.yml
 
 networks:

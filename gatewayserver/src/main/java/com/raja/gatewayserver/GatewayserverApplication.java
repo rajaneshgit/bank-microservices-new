@@ -19,15 +19,21 @@ public class GatewayserverApplication {
 		return builder.routes()
 				.route(p -> p
 						.path("/bank/accounts/**")
-						.filters(f -> f.rewritePath("/bank/accounts/(?<segment>.*)", "/${segment}"))
+						.filters(f -> f.rewritePath("/bank/accounts/(?<segment>.*)", "/${segment}")
+								.circuitBreaker(config -> config.setName("accountsCircuitBreaker")
+										.setFallbackUri("forward:/contactSupport")))
 						.uri("lb://ACCOUNTS"))
 				.route(p -> p
 						.path("/bank/loans/**")
-						.filters(f -> f.rewritePath("/bank/loans/(?<segment>.*)", "/${segment}"))
+						.filters(f -> f.rewritePath("/bank/loans/(?<segment>.*)", "/${segment}")
+								.circuitBreaker(config -> config.setName("loansCircuitBreaker")
+										.setFallbackUri("forward:/contactSupport")))
 						.uri("lb://LOANS"))
 				.route(p -> p
 						.path("/bank/cards/**")
-						.filters(f -> f.rewritePath("/bank/cards/(?<segment>.*)", "/${segment}"))
+						.filters(f -> f.rewritePath("/bank/cards/(?<segment>.*)", "/${segment}")
+								.circuitBreaker(config -> config.setName("cardsCircuitBreaker")
+								.setFallbackUri("forward:/contactSupport")))
 						.uri("lb://CARDS"))
 				.build();
 	}

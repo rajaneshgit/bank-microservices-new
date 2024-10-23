@@ -38,6 +38,10 @@ management:
       probes:
         add-additional-paths: true
         enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
 encrypt:
   key: "edg12345wd678a901g23f456A"
 

@@ -250,6 +250,7 @@ public class LoansController {
     )
     @GetMapping("/contact-info")
     public ResponseEntity<LoansContactInfoDto> getContactInfo() {
+        System.out.println("loan contact info api calling...");
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(loansContactInfoDto);

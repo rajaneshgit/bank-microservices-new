@@ -56,4 +56,11 @@ resilience4j.circuitbreaker:
       failureRateThreshold: 50
       waitDurationInOpenState: 10000
 
+logging:
+  level:
+    com:
+      raja:
+        gatewayserver: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name}],%X{trace_id},%X{span_id}"
 

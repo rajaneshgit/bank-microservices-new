@@ -57,3 +57,11 @@ eureka:
     registerWithEureka: true
     serviceUrl:
       defaultZone: http://localhost:8070/eureka/
+
+logging:
+  level:
+    com:
+      eazybytes:
+        loans: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name}],%X{trace_id},%X{span_id}"

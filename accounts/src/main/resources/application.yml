@@ -1,3 +1,6 @@
+
+#https://github.com/eazybytes/microservices/blob/3.3.2/section_20/eazy-bom/pom.xml  For git repo of microservice provided by Madan ready
+
 server:
   port: 8089
 info:
